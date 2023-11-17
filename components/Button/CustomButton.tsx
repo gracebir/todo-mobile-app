@@ -6,7 +6,7 @@ import { styles } from "./styles";
 
 interface customButtonProps {
     text: string;
-    onPress: () => void;
+    onPress?: () => void;
 }
 
 const CustomButton: FC<customButtonProps> = ({ text, onPress }) => {
