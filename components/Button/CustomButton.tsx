@@ -12,13 +12,7 @@ interface customButtonProps {
 const CustomButton: FC<customButtonProps> = ({ text, onPress }) => {
     return (
         <TouchableOpacity onPress={onPress} style={styles.buttonContainer}>
-            <Text
-                style={{
-                    ...styles.buttonText,
-                }}
-            >
-                {text}
-            </Text>
+            <Text style={styles.buttonText}>{text}</Text>
         </TouchableOpacity>
     );
 };

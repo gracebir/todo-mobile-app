@@ -8,6 +8,8 @@ import {
 } from "@expo-google-fonts/poppins";
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
+import { Image, View } from "react-native";
+import Colors from "../constants/Colors";
 
 export const unstable_settings = {
     initialRouteName: "index",
@@ -23,7 +25,6 @@ export default function RootLayout() {
         ...FontAwesome.font,
     });
 
-    // Expo Router uses Error Boundaries to catch errors in the navigation tree.
     useEffect(() => {
         if (error) throw error;
     }, [error]);
@@ -43,8 +44,17 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
     return (
-        <Stack>
-            <Stack.Screen name='index' options={{}} />
-        </Stack>
+        <>
+            <View
+                style={{
+                    backgroundColor: Colors.baseColor,
+                }}
+            >
+                <Image source={require("../assets/images/shape.png")} />
+            </View>
+            <Stack>
+                <Stack.Screen name='index' options={{ headerShown: false }} />
+            </Stack>
+        </>
     );
 }
