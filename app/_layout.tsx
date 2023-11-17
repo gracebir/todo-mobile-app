@@ -1,12 +1,15 @@
 /** @format */
 
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { useFonts } from "expo-font";
+import {
+    useFonts,
+    Poppins_600SemiBold,
+    Poppins_700Bold,
+} from "@expo-google-fonts/poppins";
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 
 export const unstable_settings = {
-    // Ensure that reloading on `/index` keeps a back button present.
     initialRouteName: "index",
 };
 
@@ -15,8 +18,8 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
     const [loaded, error] = useFonts({
-        PoppinsBold: require("../assets/fonts/Poppins-Bold.ttf"),
-        PoppinsSemiBold: require("../assets/fonts/Poppins-Bold.ttf"),
+        Poppins_700Bold,
+        Poppins_600SemiBold,
         ...FontAwesome.font,
     });
 
