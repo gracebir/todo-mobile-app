@@ -9,7 +9,7 @@ import {
     ScrollView,
 } from "react-native";
 import React, { useState } from "react";
-import { Link, useNavigation } from "expo-router";
+import { Link } from "expo-router";
 import CustomText from "../components/CustomText";
 import HeadingText from "../components/HeadingText";
 import Colors from "../constants/Colors";
@@ -18,7 +18,6 @@ import TextLink from "../components/TextLink";
 import CustomButton from "../components/Button/CustomButton";
 
 const Login = () => {
-    const navitagation = useNavigation();
     const [form, setForm] = useState({
         email: "",
         password: "",
