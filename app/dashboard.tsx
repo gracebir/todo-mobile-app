@@ -1,13 +1,6 @@
 /** @format */
 
-import {
-    View,
-    Text,
-    TouchableOpacity,
-    Image,
-    StyleSheet,
-    ScrollView,
-} from "react-native";
+import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import React from "react";
 import { useNavigation } from "expo-router";
 import Colors from "../constants/Colors";
@@ -26,28 +19,18 @@ const DashBoard = () => {
                 />
                 <Text style={styles.title}>Welcome Mary</Text>
             </View>
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={styles.content}>
-                    <View style={styles.clockImageContainer}>
-                        <Image
-                            style={styles.clockImage}
-                            source={require("../assets/data/clone-todo.png")}
-                        />
-                    </View>
-                    <View style={styles.taskListContainer}>
-                        <HeadingText text='Tasks List' />
-                        <TaskList />
-                    </View>
+            <View style={styles.content}>
+                <View style={styles.clockImageContainer}>
+                    <Image
+                        style={styles.clockImage}
+                        source={require("../assets/data/clone-todo.png")}
+                    />
                 </View>
-
-                <TouchableOpacity
-                    onPress={() => {
-                        navitagation.goBack();
-                    }}
-                >
-                    <Text>Go back</Text>
-                </TouchableOpacity>
-            </ScrollView>
+                <View style={styles.taskListContainer}>
+                    <HeadingText text='Tasks List' />
+                    <TaskList />
+                </View>
+            </View>
         </View>
     );
 };
@@ -59,7 +42,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.baseColor,
     },
     content: {
-        marginTop: 40,
+        marginTop: 25,
         paddingHorizontal: 21,
         gap: 10,
     },
@@ -90,7 +73,7 @@ const styles = StyleSheet.create({
         height: 126.571,
     },
     taskListContainer: {
-        gap: 12,
+        gap: 8,
     },
 });
 
