@@ -1,13 +1,6 @@
 /** @format */
 
-import {
-    View,
-    Text,
-    TouchableOpacity,
-    StyleSheet,
-    Image,
-    ScrollView,
-} from "react-native";
+import { View, StyleSheet, Image, ScrollView } from "react-native";
 import React, { useState } from "react";
 import { Link } from "expo-router";
 import CustomText from "../components/CustomText";
