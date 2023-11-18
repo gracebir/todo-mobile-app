@@ -1,7 +1,7 @@
 /** @format */
 
 import { Text, TouchableOpacity } from "react-native";
-import React, { FC } from "react";
+import React from "react";
 import { styles } from "./styles";
 
 interface customButtonProps {
