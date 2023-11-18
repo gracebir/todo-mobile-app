@@ -9,7 +9,7 @@ interface customButtonProps {
     onPress?: () => void;
 }
 
-const CustomButton: FC<customButtonProps> = ({ text, onPress }) => {
+const CustomButton = ({ text, onPress }: customButtonProps) => {
     return (
         <TouchableOpacity onPress={onPress} style={styles.buttonContainer}>
             <Text style={styles.buttonText}>{text}</Text>
