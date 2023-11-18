@@ -8,8 +8,6 @@ import {
 } from "@expo-google-fonts/poppins";
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
-import { Image, View } from "react-native";
-import Colors from "../constants/Colors";
 import CustomerHeader from "../components/CustomerHeader/CustomerHeader";
 
 export const unstable_settings = {
