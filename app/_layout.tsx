@@ -8,7 +8,9 @@ import {
 } from "@expo-google-fonts/poppins";
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
+import { Provider } from "react-redux";
 import CustomerHeader from "../components/CustomerHeader/CustomerHeader";
+import { store } from "../store";
 
 export const unstable_settings = {
     initialRouteName: "index",
@@ -43,7 +45,7 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
     return (
-        <>
+        <Provider store={store}>
             <Stack>
                 <Stack.Screen
                     name='index'
@@ -64,6 +66,6 @@ function RootLayoutNav() {
                     }}
                 />
             </Stack>
-        </>
+        </Provider>
     );
 }
