@@ -12,8 +12,25 @@ import CustomTextInput from "../components/CustomTextInput/CustomTextInput";
 import HeadingText from "../components/HeadingText";
 import Colors from "../constants/Colors";
 import { signupSchema } from "../utils/baseSchema";
+import { RootState } from "../utils/rootReducer";
+import { registerUser } from "../actions/auth.action";
+import { AppDispatch } from "../store";
+import { router } from "expo-router";
 
 const Register = () => {
+    const { loading, error, success } = useSelector(
+        (state: RootState) => state.auth
+    );
+
+    const dispatch: AppDispatch = useDispatch();
+
+    const showToast = () => {
+        Toast.show({
+            type: success ? "success" : "error",
+            text1: "user created successfull",
+            text2: "This is some something 👋",
+        });
+    };
     return (
         <Formik
             initialValues={{
@@ -23,7 +40,22 @@ const Register = () => {
                 confirmPassword: "",
             }}
             validationSchema={signupSchema}
-            onSubmit={(value) => console.log(value)}
+            onSubmit={async (value) => {
+                try {
+                    await dispatch(
+                        registerUser({
+                            fullname: value.fullname,
+                            email: value.email,
+                            password: value.password,
+                        })
+                    );
+
+                    // Handle success, navigate to another screen, etc.
+                } catch (error) {
+                    // Handle error (display an error message, etc.)
+                    console.error("Registration failed:", error);
+                }
+            }}
         >
             {({
                 handleChange,
@@ -31,7 +63,7 @@ const Register = () => {
                 values,
                 errors,
                 handleSubmit,
-                handleReset,
+                resetForm,
             }) => (
                 <View style={styles.container}>
                     <ScrollView
@@ -105,9 +137,16 @@ const Register = () => {
                         </View>
                         <View style={styles.buttonContainer}>
                             <CustomButton
-                                text='Register'
+                                text={loading ? "Loading..." : "Register"}
                                 onPress={() => {
                                     handleSubmit();
+                                    if (!loading && success) {
+                                        showToast();
+                                        resetForm();
+                                        setTimeout(() => {
+                                            router.replace("/dashboard");
+                                        }, 2000);
+                                    }
                                 }}
                             />
                             <View style={styles.linkText}>
