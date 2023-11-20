@@ -9,6 +9,7 @@ import {
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 import { Provider } from "react-redux";
+import Toast from "react-native-toast-message";
 import CustomerHeader from "../components/CustomerHeader/CustomerHeader";
 import { store } from "../store";
 

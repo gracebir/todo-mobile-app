@@ -1,6 +1,12 @@
 /** @format */
 
-import { View, TextInput, KeyboardTypeOptions } from "react-native";
+import {
+    View,
+    TextInput,
+    KeyboardTypeOptions,
+    TextInputFocusEventData,
+    NativeSyntheticEvent,
+} from "react-native";
 import React, { FC } from "react";
 import CustomText from "../CustomText";
 import { styles } from "./style";
@@ -12,6 +18,7 @@ interface customTextInputProps {
     isPassword?: boolean;
     value: string;
     onChange: (e: string) => void;
+    onBlur: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
     keyBoardOption: KeyboardTypeOptions;
 }
 
@@ -22,6 +29,7 @@ const CustomTextInput: FC<customTextInputProps> = ({
     keyBoardOption,
     value,
     onChange,
+    onBlur,
     isPassword = false,
 }) => {
     return (
@@ -30,6 +38,7 @@ const CustomTextInput: FC<customTextInputProps> = ({
             <TextInput
                 nativeID={nativeID}
                 onChangeText={onChange}
+                onBlur={onBlur}
                 value={value}
                 secureTextEntry={isPassword}
                 style={styles.textInput}

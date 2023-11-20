@@ -9,4 +9,10 @@ export const store = configureStore({
         auth: authSlice,
         task: taskSlice,
     },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: false,
+        }),
 });
+
+export type AppDispatch = typeof store.dispatch;
