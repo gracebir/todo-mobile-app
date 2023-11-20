@@ -9,7 +9,7 @@ import {
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 import { Provider } from "react-redux";
-import Toast from "react-native-toast-message";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import CustomerHeader from "../components/CustomerHeader/CustomerHeader";
 import { store } from "../store";
 
@@ -47,26 +47,28 @@ export default function RootLayout() {
 function RootLayoutNav() {
     return (
         <Provider store={store}>
-            <Stack>
-                <Stack.Screen
-                    name='index'
-                    options={{ header: () => <CustomerHeader /> }}
-                />
-                <Stack.Screen
-                    name='login'
-                    options={{ header: () => <CustomerHeader /> }}
-                />
-                <Stack.Screen
-                    name='register'
-                    options={{ header: () => <CustomerHeader /> }}
-                />
-                <Stack.Screen
-                    name='dashboard'
-                    options={{
-                        header: () => <CustomerHeader isBgColor={true} />,
-                    }}
-                />
-            </Stack>
+            <BottomSheetModalProvider>
+                <Stack>
+                    <Stack.Screen
+                        name='index'
+                        options={{ header: () => <CustomerHeader /> }}
+                    />
+                    <Stack.Screen
+                        name='login'
+                        options={{ header: () => <CustomerHeader /> }}
+                    />
+                    <Stack.Screen
+                        name='register'
+                        options={{ header: () => <CustomerHeader /> }}
+                    />
+                    <Stack.Screen
+                        name='dashboard'
+                        options={{
+                            header: () => <CustomerHeader isBgColor={true} />,
+                        }}
+                    />
+                </Stack>
+            </BottomSheetModalProvider>
         </Provider>
     );
 }

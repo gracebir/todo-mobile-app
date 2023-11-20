@@ -2,7 +2,6 @@
 
 import { View, Text, Image, StyleSheet } from "react-native";
 import React from "react";
-import { useNavigation } from "expo-router";
 import Colors from "../constants/Colors";
 import HeadingText from "../components/HeadingText";
 import TaskList from "../components/TaskList/TaskList";
@@ -10,11 +9,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "../utils/rootReducer";
 
 const DashBoard = () => {
-    const navitagation = useNavigation();
     const { userInfo } = useSelector((state: RootState) => state.auth);
-
     //@ts-ignore
-    console.log(userInfo.user.fullname);
+    const id: number = userInfo?.user?.id;
+    //@ts-ignore
+    const fullname: string = userInfo?.user?.fullname;
+
     return (
         <View style={styles.container}>
             <View style={styles.imageContainer}>
@@ -22,9 +22,7 @@ const DashBoard = () => {
                     style={styles.image}
                     source={require("../assets/images/emilie.png")}
                 />
-                <Text style={styles.title}>
-                    Welcome {userInfo.user.fullname}
-                </Text>
+                <Text style={styles.title}>Welcome {fullname}</Text>
             </View>
             <View style={styles.content}>
                 <View style={styles.clockImageContainer}>

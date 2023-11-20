@@ -14,7 +14,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../utils/rootReducer";
 import { AppDispatch } from "../store";
 import { loginUser } from "../actions/auth.action";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import Toast from "react-native-toast-message";
 import { router } from "expo-router";
 
@@ -46,7 +45,7 @@ const Login = () => {
                         })
                     );
                 } catch (error) {
-                    console.error("Registration failed:", error);
+                    console.error("Login failed:", error);
                 }
             }}
             validationSchema={signinSchema}
@@ -105,13 +104,9 @@ const Login = () => {
                                 text={loading ? "Loading..." : "Login"}
                                 onPress={async () => {
                                     handleSubmit();
-                                    if (!loading && !error) {
+                                    if (!loading) {
                                         showToast();
-                                        await AsyncStorage.setItem(
-                                            "token",
-                                            //@ts-ignore
-                                            JSON.stringify(userInfo.user.token)
-                                        );
+                                        console.log(userInfo);
                                         setTimeout(() => {
                                             router.replace("/dashboard");
                                         }, 2000);
