@@ -11,14 +11,23 @@ import {
 import { style } from "./style";
 import Colors from "../../constants/Colors";
 import CustomButton from "../Button/CustomButton";
-import CustomText from "../CustomText";
 import { Formik } from "formik";
 import CustomTextInput from "../CustomTextInput/CustomTextInput";
 import HeadingText from "../HeadingText";
+import { useSelector } from "react-redux";
+import { RootState } from "../../utils/rootReducer";
+import { useAddtaskMutation } from "../../slices/task.slice";
+import { taskSchema } from "../../utils/baseSchema";
 
 export type Ref = BottomSheetModal;
 
 const BottomSheet = forwardRef<Ref>((props, ref) => {
+    const { userInfo } = useSelector((state: RootState) => state.auth);
+    // const queryClient = useQueryClient();
+    //@ts-ignore
+    const id: number = userInfo?.user?.id;
+    const [addTask, { isLoading }] = useAddtaskMutation();
+
     const snapPoints = useMemo(() => ["50%"], []);
     const { dismiss } = useBottomSheetModal();
     const renderBackdrop = useCallback(
@@ -46,9 +55,19 @@ const BottomSheet = forwardRef<Ref>((props, ref) => {
                 initialValues={{
                     content: "",
                 }}
-                onSubmit={(value) => {}}
+                onSubmit={(value) => {
+                    addTask({ content: value.content, userId: id });
+                    console.log(value, id);
+                }}
+                validationSchema={taskSchema}
             >
-                {({ handleBlur, handleChange, values, errors }) => (
+                {({
+                    handleBlur,
+                    handleChange,
+                    handleSubmit,
+                    values,
+                    errors,
+                }) => (
                     <View style={style.contentContainer}>
                         <View style={style.titleContainer}>
                             <HeadingText text='Add new task' />
@@ -64,13 +83,25 @@ const BottomSheet = forwardRef<Ref>((props, ref) => {
                                 onChange={handleChange("content")}
                             />
                             {errors.content && (
-                                <Text style={{ fontSize: 10, color: "red" }}>
+                                <Text
+                                    style={{
+                                        fontSize: 14,
+                                        color: "red",
+                                        marginLeft: 10,
+                                    }}
+                                >
                                     {errors.content}
                                 </Text>
                             )}
                             <CustomButton
-                                text='Add Task'
-                                onPress={() => dismiss()}
+                                text={isLoading ? "Saving..." : "Add Task"}
+                                onPress={() => {
+                                    console.log("click me");
+                                    handleSubmit();
+                                    // if (!isLoading) {
+                                    //     conte
+                                    // }
+                                }}
                             />
                         </View>
                     </View>

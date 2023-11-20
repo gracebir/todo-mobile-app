@@ -11,11 +11,17 @@ import {
 import React, { useRef } from "react";
 import { styles } from "./style";
 import TaskItem, { taskIteProps } from "../TaskItem";
-import { taskItems } from "../../assets/data/data";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import BottomSheet from "../ButtomSheet/ButtomSheet";
+import { useSelector } from "react-redux";
+import { RootState } from "../../utils/rootReducer";
+import { useGetAllTasksQuery } from "../../slices/task.slice";
 
 const TaskList = () => {
+    const { userInfo } = useSelector((state: RootState) => state.auth);
+    //@ts-ignore
+    const id: number = userInfo?.user?.id;
+    const { data: taskLists } = useGetAllTasksQuery(id);
     const bottomSheetRef = useRef<BottomSheetModal>(null);
     const openModal = () => {
         bottomSheetRef.current?.present();
@@ -39,13 +45,19 @@ const TaskList = () => {
                 </TouchableOpacity>
             </View>
             <View>
-                <FlatList
-                    style={{
-                        height: 182,
-                    }}
-                    data={taskItems}
-                    renderItem={renderItem}
-                />
+                {taskLists?.length ? (
+                    <FlatList
+                        style={{
+                            height: 182,
+                        }}
+                        data={taskLists}
+                        renderItem={renderItem}
+                    />
+                ) : (
+                    <View style={{ alignItems: "center" }}>
+                        <Text>You Don't have Tasks</Text>
+                    </View>
+                )}
             </View>
             <BottomSheet ref={bottomSheetRef} />
         </View>
