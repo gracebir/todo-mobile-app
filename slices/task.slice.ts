@@ -47,7 +47,7 @@ export const taskSliceApi = createApi({
                     body,
                 };
             },
-            invalidatesTags: [{ type: "Itask", id: "Itask" }],
+            invalidatesTags: [{ type: "Itask", id: "LIST" }],
         }),
     }),
 });
