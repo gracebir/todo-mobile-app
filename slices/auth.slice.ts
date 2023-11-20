@@ -1,6 +1,6 @@
 /** @format */
 
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { loginUser, registerUser } from "../actions/auth.action";
 
 const initialState = {
@@ -46,7 +46,7 @@ const authSlice = createSlice({
             .addCase(loginUser.fulfilled, (state, { payload }) => {
                 state.loading = false;
                 state.userInfo = payload;
-                state.userToken = payload.token;
+                state.userToken = payload?.user?.token;
             })
             .addCase(loginUser.rejected, (state, { payload }) => {
                 state.loading = false;
