@@ -15,3 +15,7 @@ export const signinSchema = yup.object().shape({
     email: yup.string().email().required("Email Required"),
     password: yup.string().min(8).required("Password required"),
 });
+
+export const taskSchema = yup.object().shape({
+    content: yup.string().required("Content can not be empty"),
+});
