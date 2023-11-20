@@ -1,6 +1,6 @@
 /** @format */
 
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { loginUser, registerUser } from "../actions/auth.action";
 
 const initialState = {
@@ -11,10 +11,17 @@ const initialState = {
     success: false, // for monitoring the registration process.
 };
 
+interface registerType {
+    fullname: string;
+    email: string;
+    password: string;
+}
+
 const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {},
+
     extraReducers: (builder) => {
         builder
             .addCase(registerUser.pending, (state) => {
